@@ -64,8 +64,11 @@ def root():
 
 @app.post("/chat", response_model=ChatResponse)
 def chat(req: ChatRequest):
-    result = run_agent(req.message)
-    return ChatResponse(agent=result["agent"], answer=result["answer"])
+    try:
+        result = run_agent(req.message)
+        return ChatResponse(agent=result["agent"], answer=result["answer"])
+    except Exception as e:
+        return ChatResponse(agent="error", answer=f"AI service error: {str(e)}")
 
 
 @app.post("/predict-price", response_model=PricePredictResponse)

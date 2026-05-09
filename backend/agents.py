@@ -26,7 +26,8 @@ def _call_llm(system: str, user: str) -> str:
         "temperature": 0.3,
     }
     response = requests.post(HF_ROUTER_URL, headers=headers, json=payload, timeout=60)
-    response.raise_for_status()
+    if not response.ok:
+        raise RuntimeError(f"LLM API error {response.status_code}: {response.text[:300]}")
     return response.json()["choices"][0]["message"]["content"].strip()
 
 
