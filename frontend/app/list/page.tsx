@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 import ConnectWallet from "@/components/ConnectWallet";
 
 const CONDITIONS = ["Excellent", "Good", "Fair"];
+const PIANO_TYPES = ["Upright", "Grand", "Baby Grand", "Digital", "Hybrid"];
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://viviancao-bluerosemart-api.hf.space";
 
 export default function ListPage() {
   const { isConnected } = useConnection();
@@ -24,7 +26,34 @@ export default function ListPage() {
     description: "",
     imageHash: "",
     price: "",
+    type: "Upright",
   });
+
+  const [suggestedPrice, setSuggestedPrice] = useState<number | null>(null);
+  const [predicting, setPredicting] = useState(false);
+
+  async function predictPrice() {
+    if (!form.brand || !form.yearMade || !form.type || !form.condition) return;
+    setPredicting(true);
+    try {
+      const res = await fetch(`${API_URL}/predict-price`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          brand: form.brand,
+          type: form.type,
+          condition: form.condition,
+          year_made: Number(form.yearMade),
+        }),
+      });
+      const data = await res.json();
+      setSuggestedPrice(data.predicted_price_usdc);
+    } catch {
+      setSuggestedPrice(null);
+    } finally {
+      setPredicting(false);
+    }
+  }
 
   const { mutate: writeContract, data: txHash, isPending, error } = useWriteContract();
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash: txHash });
@@ -86,6 +115,44 @@ export default function ListPage() {
               {CONDITIONS.map((c) => <option key={c}>{c}</option>)}
             </select>
           </div>
+        </div>
+
+        <div>
+          <label className="block text-sm text-gray-400 mb-1">Piano Type</label>
+          <select
+            name="type"
+            value={form.type}
+            onChange={handleChange}
+            className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+          >
+            {PIANO_TYPES.map((t) => <option key={t}>{t}</option>)}
+          </select>
+        </div>
+
+        <div className="bg-gray-800 rounded-xl p-4 space-y-3">
+          <div className="flex items-center justify-between">
+            <p className="text-sm text-gray-400">AI Price Suggestion</p>
+            <button
+              type="button"
+              onClick={predictPrice}
+              disabled={predicting || !form.brand || !form.yearMade}
+              className="text-xs bg-orange-500 hover:bg-orange-400 disabled:opacity-50 text-white px-3 py-1 rounded-lg transition"
+            >
+              {predicting ? "Predicting…" : "Get Suggested Price"}
+            </button>
+          </div>
+          {suggestedPrice && (
+            <div className="flex items-center justify-between">
+              <p className="text-orange-400 font-bold text-lg">${suggestedPrice.toLocaleString()} USDC</p>
+              <button
+                type="button"
+                onClick={() => setForm((f) => ({ ...f, price: String(Math.round(suggestedPrice)) }))}
+                className="text-xs text-gray-400 hover:text-white underline"
+              >
+                Use this price
+              </button>
+            </div>
+          )}
         </div>
 
         <div>
