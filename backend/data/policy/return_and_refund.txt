@@ -1,0 +1,38 @@
+BLUEROSEMART RETURN AND REFUND POLICY
+======================================
+
+1. GENERAL POLICY
+Due to the nature of blockchain escrow transactions, all sales on BlueRoseMart are considered final once the buyer confirms delivery. Buyers are strongly advised to inspect the piano thoroughly before confirming delivery on the platform.
+
+2. REFUND BEFORE DELIVERY CONFIRMATION
+If the buyer has not yet confirmed delivery and believes the piano does not match the listing description, they may request a refund by opening a dispute. The escrow funds remain locked until the dispute is resolved. Do not confirm delivery if you intend to request a refund.
+
+3. REFUND ELIGIBILITY
+A refund may be considered under the following circumstances:
+- The piano is significantly different from the listing description (e.g. wrong brand, model or condition)
+- The piano arrived with major undisclosed damage
+- The seller failed to deliver within the agreed timeframe
+- The listing contained fraudulent or misleading information
+
+4. NON-REFUNDABLE SITUATIONS
+Refunds will NOT be granted in the following situations:
+- The buyer has already confirmed delivery on the platform
+- The buyer changed their mind after purchase
+- Minor cosmetic differences that were reasonably described in the listing
+- Disagreements over subjective quality assessments
+
+5. HOW TO REQUEST A REFUND
+1. Do NOT click Confirm Delivery
+2. Contact the seller through the platform messaging system
+3. If the seller does not respond within 3 business days, raise a dispute
+4. Submit your dispute with evidence including photos, videos and transaction hash
+5. BlueRoseMart support will review within 3 to 7 business days
+
+6. DISPUTE RESOLUTION OUTCOME
+If BlueRoseMart support rules in favour of the buyer, the escrow funds will be returned to the buyer's wallet address on Base Sepolia. If ruled in favour of the seller, funds will be released to the seller. The decision is final.
+
+7. GAS FEES
+Gas fees paid during the transaction (USDC approval and purchase transactions) are non-refundable as they are paid to blockchain validators and not to BlueRoseMart.
+
+8. CONTACT
+For refund and return enquiries, contact BlueRoseMart support with your wallet address and transaction hash.

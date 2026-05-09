@@ -1,0 +1,13 @@
+node_modules/
+.env
+.env.local
+contracts/artifacts/
+contracts/cache/
+contracts/.env
+frontend/.env.local
+backend/venv/
+backend/__pycache__/
+backend/ml/model.joblib
+backend/data/piano_prices.csv
+*.pyc
+.DS_Store

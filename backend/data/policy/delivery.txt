@@ -1,0 +1,26 @@
+BLUEROSEMART DELIVERY POLICY
+=============================
+
+1. DELIVERY RESPONSIBILITY
+The seller is fully responsible for ensuring the piano is delivered safely to the buyer. Sellers must arrange professional piano movers and provide the buyer with tracking or delivery details within 3 business days of a confirmed purchase.
+
+2. DELIVERY TIMEFRAME
+Standard delivery should be completed within 7 to 14 business days from the purchase date. For international or long-distance deliveries, up to 30 days is acceptable. Sellers must notify buyers of any delays immediately.
+
+3. DELIVERY CONFIRMATION
+Once the buyer physically receives and inspects the piano, they must click the Confirm Delivery button on the listing page. This action releases the USDC escrow payment to the seller. Buyers should only confirm delivery after fully inspecting the piano.
+
+4. INSPECTION BEFORE CONFIRMATION
+Buyers are strongly advised to inspect the piano thoroughly before confirming delivery. Check all keys, pedals, soundboard condition, tuning stability and overall cosmetic condition. Once delivery is confirmed the transaction is final and cannot be reversed on the blockchain.
+
+5. FAILED OR MISSED DELIVERY
+If the seller fails to deliver within the agreed timeframe, the buyer should contact the seller first. If unresolved after 3 business days, the buyer may open a dispute through the platform support channel. Do not confirm delivery if the piano has not arrived.
+
+6. DELIVERY COST
+Delivery costs are negotiated directly between buyer and seller and are not included in the USDC listing price unless explicitly stated in the listing description. Always confirm delivery costs with the seller before purchasing.
+
+7. DAMAGE DURING DELIVERY
+If the piano arrives damaged, document the damage with photos and videos immediately. Do not confirm delivery. Contact the seller and the delivery company. If unresolved within 3 business days, raise a dispute with BlueRoseMart support.
+
+8. SELF COLLECTION
+Buyers may arrange self-collection from the seller's location. Confirm the arrangement with the seller in advance. The buyer should inspect the piano on-site before confirming delivery on the platform.

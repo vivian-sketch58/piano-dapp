@@ -1,0 +1,146 @@
+BLUEROSEMART TECHNICAL SUPPORT GUIDE
+=====================================
+
+BLOCKCHAIN BASICS
+-----------------
+
+What is a Blockchain?
+A blockchain is a distributed digital ledger that records transactions across thousands of computers simultaneously. Once data is written to the blockchain it is permanent and cannot be altered. This makes it ideal for recording ownership, payments and marketplace transactions without relying on a central authority like a bank or company.
+
+What is Base Network?
+Base is an Ethereum Layer 2 blockchain developed by Coinbase. It processes transactions faster and at significantly lower cost than Ethereum mainnet while inheriting Ethereum's security guarantees. Base is ideal for consumer applications like BlueRoseMart because gas fees are typically under $0.01 per transaction.
+
+What is Base Sepolia?
+Base Sepolia is the test network (testnet) for Base. It uses test ETH and test USDC that have no real monetary value. Developers and users use Base Sepolia to test transactions before committing real funds. Chain ID is 84532. RPC URL is https://sepolia.base.org. Block explorer is https://sepolia.basescan.org.
+
+What is a Smart Contract?
+A smart contract is a program stored permanently on the blockchain that automatically executes when specific conditions are met. BlueRoseMart uses a smart contract called BlueRoseMart deployed at 0x618CDCa2F799672C8C4D839F8329B0b98794dDdB on Base Sepolia. It handles listing creation, USDC escrow, payment release and listing cancellation without any human intermediary.
+
+What is Gas?
+Gas is the computational fee paid to blockchain validators for processing transactions. On Base Sepolia gas is paid in test ETH and has no real value. On Base mainnet gas fees are typically $0.001 to $0.01 per transaction making it very affordable for users.
+
+METAMASK SETUP
+--------------
+
+What is MetaMask?
+MetaMask is the most popular Ethereum-compatible browser wallet. It stores your private keys securely in your browser and allows you to sign transactions and interact with blockchain applications. Available as a Chrome, Firefox, Brave and Edge extension, and as a mobile app for iOS and Android.
+
+How to Install MetaMask
+1. Go to https://metamask.io/download
+2. Click Install MetaMask for your browser
+3. Click Add to Chrome (or your browser)
+4. Click Add Extension
+5. Click Get Started and follow the setup wizard
+6. Write down your 12-word seed phrase and store it safely offline
+7. Never share your seed phrase with anyone
+
+How to Add Base Sepolia to MetaMask
+1. Open MetaMask and click the network dropdown at the top
+2. Click Add Network then Add a network manually
+3. Enter the following details:
+   - Network Name: Base Sepolia Testnet
+   - RPC URL: https://sepolia.base.org
+   - Chain ID: 84532
+   - Currency Symbol: ETH
+   - Block Explorer URL: https://sepolia.basescan.org
+4. Click Save
+5. Select Base Sepolia Testnet from the network list
+
+How to Switch Networks in MetaMask
+Click the network name at the top of the MetaMask popup. A list of your added networks will appear. Click Base Sepolia Testnet to switch. If you see a yellow Switch to Base Sepolia button on the BlueRoseMart site, click it and MetaMask will automatically prompt you to switch.
+
+What is a Private Key?
+A private key is a 64-character hexadecimal string that cryptographically proves ownership of a wallet. It is essentially your wallet password. Never share your private key with anyone, including BlueRoseMart support. To export your private key in MetaMask go to Account Details then Show Private Key and enter your MetaMask password.
+
+What is a Wallet Address?
+A wallet address is a public 42-character string beginning with 0x. It is derived from your private key but cannot be used to access your wallet. It is safe to share your wallet address with others so they can send you funds.
+
+USDC AND PAYMENTS
+-----------------
+
+What is USDC?
+USDC (USD Coin) is a stablecoin issued by Circle. Each USDC is backed by one US dollar held in reserve. It is one of the most trusted and widely used stablecoins. BlueRoseMart uses USDC for all payments ensuring price stability compared to volatile cryptocurrencies like ETH.
+
+USDC Contract on Base Sepolia
+The official USDC contract address on Base Sepolia is 0x036CbD53842c5426634e7929541eC2318f3dCF7e. Always verify this address before approving transactions. This is the Circle-issued test USDC for development purposes.
+
+How to Get Test USDC on Base Sepolia
+1. Go to https://faucet.circle.com
+2. Select Base Sepolia as the network
+3. Enter your wallet address
+4. Complete the verification and click Send 20 USDC
+5. Test USDC will arrive in your wallet within seconds
+6. Limit is one request per wallet per 2 hours
+
+How to Approve USDC Spending
+Before buying a piano you must authorise the BlueRoseMart smart contract to spend your USDC. This is a standard ERC-20 approval step.
+1. Click the Approve USDC button on the listing page
+2. MetaMask will open showing the approval transaction
+3. Make sure you are on Base Sepolia network
+4. Click Confirm
+5. Wait for the transaction to confirm (usually under 5 seconds)
+6. The Buy button will then become available
+
+What is an ERC-20 Token?
+ERC-20 is the technical standard for fungible tokens on Ethereum and compatible chains like Base. USDC is an ERC-20 token. The standard defines functions like transfer(), approve() and allowance() that all compliant tokens must implement. The approve() function allows a spender (like our marketplace contract) to transfer tokens on your behalf up to a specified amount.
+
+TRANSACTIONS
+------------
+
+How to Check a Transaction on the Blockchain
+1. Copy your transaction hash (a 0x... string shown in MetaMask after confirming)
+2. Go to https://sepolia.basescan.org
+3. Paste the transaction hash in the search bar
+4. View full transaction details including status, gas used, block number and contract interactions
+
+Transaction Status Meanings
+- Pending: Transaction submitted but not yet confirmed in a block. Usually resolves within 5 seconds on Base.
+- Success: Transaction confirmed and state changes applied on the blockchain.
+- Failed: Transaction was rejected. Gas was still charged. Check the error reason on Basescan.
+
+Why is My Transaction Failing?
+Common reasons for transaction failure:
+1. Insufficient ETH for gas - ensure your wallet has at least 0.002 ETH on Base Sepolia
+2. Insufficient USDC balance - ensure you have enough USDC for the purchase price
+3. Wrong network - ensure MetaMask is on Base Sepolia (Chain ID 84532)
+4. USDC not approved - you must approve USDC spending before buying
+5. Listing no longer available - another buyer may have purchased it first
+
+How to Speed Up a Pending Transaction
+In MetaMask, click Activity, find the pending transaction and click Speed Up. This submits the same transaction with a higher gas fee to prioritise processing. On Base Sepolia speed up is rarely needed as blocks confirm very quickly.
+
+How to Get Base Sepolia Test ETH
+1. Go to https://www.alchemy.com/faucets/base-sepolia
+2. Sign in with Google or GitHub
+3. Enter your wallet address
+4. Click Send me ETH
+5. You will receive 0.1 test ETH
+6. Alternatively use https://superbridge.app/base-sepolia to bridge test ETH from Ethereum Sepolia
+
+SMART CONTRACT FUNCTIONS
+------------------------
+
+listPiano(brand, model, yearMade, condition, description, imageHash, price)
+Creates a new piano listing on the blockchain. Called when a seller submits the List Piano form. The price is in USDC with 6 decimal places (e.g. 1000000 = 1 USDC). Returns the new listing ID.
+
+buyPiano(id)
+Transfers USDC from the buyer's wallet to the escrow contract. Changes listing status from Listed to AwaitingDelivery. Records the buyer's address on-chain. Requires prior USDC approval equal to or greater than the listing price.
+
+confirmDelivery(id)
+Called by the buyer after receiving the piano. Releases USDC from escrow to the seller's wallet. Changes listing status to Sold. This action is irreversible on the blockchain. Only the recorded buyer can call this function.
+
+cancelListing(id)
+Called by the seller to remove an active listing. Changes status to Cancelled. Can only be called on listings with Available status. Cannot cancel a listing that has been purchased (AwaitingDelivery or Sold).
+
+getListing(id)
+A read-only function that returns all details of a listing by ID including seller, buyer, brand, model, year, condition, description, image hash, price and status.
+
+getAllListings()
+Returns all listings ever created on the marketplace as an array. The frontend filters for active listings with status 0 (Available).
+
+LISTING STATUS CODES
+--------------------
+0 = Listed (Available for purchase)
+1 = AwaitingDelivery (Purchased, waiting for buyer to confirm)
+2 = Sold (Delivery confirmed, payment released)
+3 = Cancelled (Seller cancelled the listing)
