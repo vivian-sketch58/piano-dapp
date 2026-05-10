@@ -63,10 +63,16 @@ export default function ChatWidget() {
       {/* Floating button */}
       <button
         onClick={() => setOpen((o) => !o)}
-        className="fixed bottom-6 right-6 z-50 bg-orange-500 hover:bg-orange-400 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg text-2xl transition"
+        className="fixed bottom-6 right-6 z-50 bg-orange-500 hover:bg-orange-400 text-white rounded-2xl px-4 py-2 flex items-center gap-3 shadow-lg transition"
         aria-label="Open chat"
       >
-        {open ? "✕" : "🎹"}
+        <span className="text-2xl">{open ? "✕" : "🎹"}</span>
+        {!open && (
+          <div className="text-left">
+            <p className="font-bold text-sm leading-tight">BlueRoseMart AI</p>
+            <p className="text-orange-100 text-xs leading-tight">Policy · Product · Tech · General</p>
+          </div>
+        )}
       </button>
 
       {/* Chat panel */}
