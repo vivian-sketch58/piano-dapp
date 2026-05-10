@@ -3,7 +3,7 @@
 ![Next.js](https://img.shields.io/badge/Next.js-1D4ED8?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-1D4ED8?style=for-the-badge&logo=typescript&logoColor=white)
 ![MetaMask](https://img.shields.io/badge/MetaMask-1D4ED8?style=for-the-badge&logo=metamask&logoColor=white)
-![Base_Sepolia](https://img.shields.io/badge/Base_Sepolia-1D4ED8?style=for-the-badge&logo=ethereum&logoColor=white)
+![Base_Sepolia](https://img.shields.io/badge/Base_Sepolia-0052FF?style=for-the-badge&logo=ethereum&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-1D4ED8?style=for-the-badge&logo=vercel&logoColor=white)
 <br>
 <!-- Multi-agents RAG+DuckDuckGo: Purple -->
