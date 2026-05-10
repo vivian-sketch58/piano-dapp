@@ -1,6 +1,8 @@
-# PianoChain — 2nd-Hand Piano Marketplace DApp
+# BlueRoseMart — Blockchain Piano Marketplace
 
-A decentralised marketplace for buying and selling second-hand pianos, built on **Base Sepolia** (L2). Payments are made in **USDC** and held in smart-contract escrow until the buyer confirms delivery.
+A decentralised marketplace for buying and selling second-hand pianos, built on **Base Sepolia** (L2). Payments are made in **USDC** held in smart-contract escrow. The platform includes a **multi-agent AI assistant**, **ML price prediction**, and a **Telegram chatbot**.
+
+**Live:** https://piano-dapp.vercel.app
 
 ---
 
@@ -8,26 +10,39 @@ A decentralised marketplace for buying and selling second-hand pianos, built on 
 
 ```
 piano-dapp/
-├── contracts/          # Solidity + Hardhat
+├── contracts/               # Solidity + Hardhat
 │   ├── contracts/
-│   │   ├── BlueRoseMart.sol       # Core marketplace contract
-│   │   └── MockUSDC.sol           # ERC-20 mock for local testing
-│   ├── scripts/deploy.js          # Deployment script
-│   ├── test/BlueRoseMart.test.js  # 6 Hardhat tests
+│   │   ├── BlueRoseMart.sol          # Core marketplace contract
+│   │   └── MockUSDC.sol              # ERC-20 mock for local testing
+│   ├── scripts/deploy.js             # Deployment script
+│   ├── test/BlueRoseMart.test.js     # 6 Hardhat tests
 │   └── hardhat.config.js
-└── frontend/           # Next.js 16 + wagmi v2 + Tailwind CSS
-    ├── app/
-    │   ├── page.tsx               # Browse listings
-    │   ├── list/page.tsx          # Seller: create a listing
-    │   └── listing/[id]/page.tsx  # Buyer: view & purchase
-    ├── components/
-    │   ├── Navbar.tsx
-    │   ├── PianoCard.tsx
-    │   ├── ConnectWallet.tsx
-    │   └── Providers.tsx          # wagmi + React Query providers
-    └── lib/
-        ├── contracts.ts           # ABI + address constants
-        └── wagmi.ts               # wagmi config (Base Sepolia)
+├── frontend/                # Next.js + wagmi + Tailwind CSS
+│   ├── app/
+│   │   ├── page.tsx                  # Browse listings
+│   │   ├── list/page.tsx             # Seller: create a listing + AI price suggestion
+│   │   └── listing/[id]/page.tsx     # Buyer: view & purchase
+│   ├── components/
+│   │   ├── Navbar.tsx
+│   │   ├── PianoCard.tsx
+│   │   ├── ConnectWallet.tsx
+│   │   ├── ChatWidget.tsx            # Floating AI chat widget
+│   │   └── Providers.tsx
+│   └── lib/
+│       ├── contracts.ts
+│       └── wagmi.ts
+└── backend/                 # FastAPI AI backend (HuggingFace Spaces)
+    ├── main.py                       # FastAPI app: /chat, /predict-price, /n8n-webhook
+    ├── agents.py                     # Multi-agent routing + LLM calls
+    ├── rag.py                        # FAISS vector store + RAG retrieval
+    ├── ml/
+    │   ├── generate_data.py          # Generates 2000 synthetic piano price records
+    │   └── train.py                  # GradientBoostingRegressor (R²=0.977)
+    ├── data/
+    │   ├── policy/                   # delivery.txt, return_and_refund.txt, warranty.txt
+    │   ├── product/                  # product.txt
+    │   └── tech/                     # tech_support.txt
+    └── Dockerfile
 ```
 
 ---
@@ -58,145 +73,62 @@ Listed → AwaitingDelivery → Sold
 | `cancelListing(id)` | Seller | Cancels before any buyer commits |
 | `getAllListings()` | Anyone | Returns all listings as an array |
 
-### Network addresses
+### Deployed addresses (Base Sepolia)
 
-| Network | USDC address |
-|---------|-------------|
-| Base Sepolia (testnet) | `0x036CbD53842c5426634e7929541eC2318f3dCF7e` |
-| Base Mainnet | `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913` |
-| Local Hardhat | Deployed as `MockUSDC` automatically |
-
----
-
-## Prerequisites
-
-- [Node.js 20](https://nodejs.org/) (use `nvm use 20`)
-- [MetaMask](https://metamask.io/) browser extension
-- A wallet funded with **Base Sepolia ETH** (for gas) — get some from the [Base Sepolia faucet](https://www.alchemy.com/faucets/base-sepolia)
-- **Base Sepolia USDC** for testing purchases — bridge or use the [Circle faucet](https://faucet.circle.com/)
+| Contract | Address |
+|----------|---------|
+| BlueRoseMart | `0x618CDCa2F799672C8C4D839F8329B0b98794dDdB` |
+| USDC | `0x036CbD53842c5426634e7929541eC2318f3dCF7e` |
 
 ---
 
-## Local Development
+## AI Backend
 
-### 1. Install dependencies
+Deployed at: **https://viviancao-bluerosemart-api.hf.space**
 
-```bash
-cd contracts && npm install
-cd ../frontend && npm install
-```
+### Multi-Agent System
 
-### 2. Run the test suite
+Powered by **Qwen/Qwen2.5-7B-Instruct** via HuggingFace Router. Incoming questions are routed to one of four specialised agents:
 
-```bash
-cd contracts
-npx hardhat test
-```
+| Agent | Triggers | Knowledge source |
+|-------|----------|-----------------|
+| **Policy** | refund, escrow, dispute, cancel, fee | RAG over `data/policy/` |
+| **Product** | price, brand, model, Yamaha, condition | RAG over `data/product/` |
+| **Tech** | MetaMask, USDC, wallet, blockchain, gas | RAG over `data/tech/` |
+| **General** | everything else | DuckDuckGo live search |
 
-All 6 tests should pass:
-- Seller can list a piano
-- Buyer can purchase (funds go to escrow)
-- Buyer confirms delivery — USDC released to seller
-- Seller can cancel before a buyer
-- Seller cannot buy own listing
-- Only buyer can confirm delivery
+### ML Price Prediction
 
-### 3. Run a local Hardhat node (optional)
+- Model: `GradientBoostingRegressor` (sklearn)
+- Training data: 2000 synthetic piano records (10 brands × 5 types × 3 conditions)
+- **R² = 0.977 / MAE ≈ $1,250**
+- Inputs: brand, type, condition, year made
+- Output: predicted price in USDC
 
-```bash
-cd contracts
-npx hardhat node
-# In another terminal:
-npx hardhat run scripts/deploy.js --network hardhat
-```
+### API Endpoints
 
----
-
-## Deploy to Base Sepolia
-
-### 1. Create `contracts/.env`
-
-```bash
-cp contracts/.env.example contracts/.env
-```
-
-Edit `contracts/.env`:
-
-```env
-PRIVATE_KEY=0xYOUR_WALLET_PRIVATE_KEY
-BASE_SEPOLIA_RPC_URL=https://sepolia.base.org
-BASESCAN_API_KEY=your_basescan_api_key_here   # optional, for contract verification
-```
-
-> Never commit `.env` — it is already in `.gitignore`.
-
-### 2. Deploy
-
-```bash
-cd contracts
-npx hardhat run scripts/deploy.js --network baseSepolia
-```
-
-Output will look like:
-
-```
-Deploying with: 0xYourAddress
-Network: baseSepolia
-BlueRoseMart deployed to: 0xDEPLOYED_ADDRESS
-USDC address used: 0x036CbD53842c5426634e7929541eC2318f3dCF7e
-
-Add these to your frontend .env.local:
-NEXT_PUBLIC_MARKETPLACE_ADDRESS=0xDEPLOYED_ADDRESS
-NEXT_PUBLIC_USDC_ADDRESS=0x036CbD53842c5426634e7929541eC2318f3dCF7e
-```
-
-### 3. (Optional) Verify on Basescan
-
-```bash
-cd contracts
-npx hardhat verify --network baseSepolia 0xDEPLOYED_ADDRESS 0x036CbD53842c5426634e7929541eC2318f3dCF7e
-```
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/` | Health check |
+| `POST` | `/chat` | Multi-agent AI chat |
+| `POST` | `/predict-price` | ML price prediction |
+| `POST` | `/n8n-webhook` | Telegram bot via n8n |
 
 ---
 
-## Run the Frontend
+## Features
 
-### 1. Create `frontend/.env.local`
+### Chat Widget
+A floating 🎹 button appears on every page of the frontend. Click it to open the AI assistant and ask questions about pianos, policies, or the platform.
 
-```env
-NEXT_PUBLIC_MARKETPLACE_ADDRESS=0xDEPLOYED_ADDRESS
-NEXT_PUBLIC_USDC_ADDRESS=0x036CbD53842c5426634e7929541eC2318f3dCF7e
-```
+### AI Price Suggestion
+On the **List a Piano** page, fill in Brand, Type, Condition and Year Made, then click **"Get Suggested Price"** to get an ML-predicted market price. Click **"Use this price"** to auto-fill it.
 
-### 2. Start the dev server
+### Telegram Bot
+Connected via **n8n** cloud workflow:
+`Telegram Trigger → HTTP Request (/n8n-webhook) → Telegram Send`
 
-```bash
-cd frontend
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000).
-
-### 3. Connect MetaMask
-
-- Switch MetaMask to **Base Sepolia** (Chain ID 84532)
-- Click **Connect Wallet** in the navbar
-
----
-
-## End-to-End Test Flow
-
-1. **Seller wallet**: open `/list`, fill in piano details, optionally paste an IPFS image CID, set a USDC price, submit — approve the transaction in MetaMask
-2. **Buyer wallet**: browse the home page, click a listing, approve USDC spending, click **Buy** — USDC moves into escrow
-3. **Buyer wallet**: after receiving the piano, click **Confirm Delivery** — USDC is released to the seller
-
----
-
-## Uploading Images to IPFS (optional)
-
-1. Create a free account at [Pinata](https://pinata.cloud/)
-2. Upload a piano photo — copy the resulting **CID** (e.g. `QmXyz...`)
-3. Paste the CID into the **IPFS Image Hash** field when listing; the frontend renders it via `https://ipfs.io/ipfs/<CID>`
+Messages sent to the Telegram bot receive AI-generated replies from the same multi-agent system.
 
 ---
 
@@ -205,11 +137,79 @@ Open [http://localhost:3000](http://localhost:3000).
 | Layer | Technology |
 |-------|-----------|
 | Smart contracts | Solidity 0.8.20, OpenZeppelin 5 |
-| Contract tooling | Hardhat 2, hardhat-toolbox, ethers v6 |
+| Contract tooling | Hardhat 2, ethers v6 |
 | L2 network | Base Sepolia / Base Mainnet |
 | Payment token | USDC (ERC-20, 6 decimals) |
-| Frontend | Next.js 16, React 19, TypeScript |
-| Web3 hooks | wagmi v2, viem v2 |
-| Async state | TanStack React Query v5 |
-| Styling | Tailwind CSS v4 |
-| Wallet | MetaMask (via wagmi injected connector) |
+| Frontend | Next.js, React, TypeScript |
+| Web3 hooks | wagmi, viem |
+| Styling | Tailwind CSS |
+| Wallet | MetaMask (injected connector) |
+| AI backend | FastAPI, LangChain, FAISS |
+| LLM | Qwen/Qwen2.5-7B-Instruct (HuggingFace Router) |
+| ML | scikit-learn GradientBoostingRegressor, joblib |
+| Embeddings | sentence-transformers/all-MiniLM-L6-v2 |
+| Search | DuckDuckGo (general agent) |
+| Backend hosting | HuggingFace Spaces (Docker) |
+| Frontend hosting | Vercel |
+| Chatbot | Telegram + n8n Cloud |
+
+---
+
+## Prerequisites
+
+- [Node.js 20](https://nodejs.org/)
+- [MetaMask](https://metamask.io/) browser extension
+- Wallet funded with **Base Sepolia ETH** — [Base Sepolia faucet](https://www.alchemy.com/faucets/base-sepolia)
+- **Base Sepolia USDC** — [Circle faucet](https://faucet.circle.com/)
+
+---
+
+## Local Development
+
+### Contracts
+
+```bash
+cd contracts && npm install
+npx hardhat test        # run 6 tests
+npx hardhat node        # local node (optional)
+```
+
+### Frontend
+
+```bash
+cd frontend && npm install
+```
+
+Create `frontend/.env.local`:
+```env
+NEXT_PUBLIC_MARKETPLACE_ADDRESS=0x618CDCa2F799672C8C4D839F8329B0b98794dDdB
+NEXT_PUBLIC_USDC_ADDRESS=0x036CbD53842c5426634e7929541eC2318f3dCF7e
+NEXT_PUBLIC_API_URL=https://viviancao-bluerosemart-api.hf.space
+```
+
+```bash
+npm run dev   # http://localhost:3000
+```
+
+### Backend
+
+```bash
+cd backend && pip install -r requirements.txt
+python ml/generate_data.py && python ml/train.py
+uvicorn main:app --reload --port 8000
+```
+
+Create `backend/.env`:
+```env
+HF_TOKEN=hf_your_token_here
+```
+
+---
+
+## End-to-End Test Flow
+
+1. **Seller**: go to `/list` → fill in piano details → click **"Get Suggested Price"** → set price → submit → approve in MetaMask
+2. **Buyer**: browse home page → click a listing → approve USDC → click **Buy** → USDC moves into escrow
+3. **Buyer**: after receiving piano → click **Confirm Delivery** → USDC released to seller
+4. **AI chat**: click the 🎹 button → ask anything about pianos or the platform
+5. **Telegram**: message the bot → receive AI reply within seconds
