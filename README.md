@@ -12,11 +12,9 @@
 ![RAG](https://img.shields.io/badge/RAG_LangChain+FAISS-7C3AED?style=for-the-badge&logoColor=white)
 ![DuckDuckGo](https://img.shields.io/badge/DuckDuckGo-7C3AED?style=for-the-badge&logo=duckduckgo&logoColor=white)
 <br>
-<!-- ML deployment: Orange -->
+<!-- ML deployment: Orange | n8n Telegram bot: Green -->
 ![ML](https://img.shields.io/badge/ML_GBR-EA580C?style=for-the-badge&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-EA580C?style=for-the-badge&logo=scikit-learn&logoColor=white)
-<br>
-<!-- n8n Telegram bot: Green -->
 ![n8n](https://img.shields.io/badge/n8n-16A34A?style=for-the-badge&logo=n8n&logoColor=white)
 ![Telegram](https://img.shields.io/badge/Telegram-16A34A?style=for-the-badge&logo=telegram&logoColor=white)
 
