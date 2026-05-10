@@ -23,7 +23,7 @@ export default function Home() {
         </div>
         <Link
           href="/list"
-          className="bg-orange-500 hover:bg-orange-400 text-white font-semibold px-5 py-2.5 rounded-lg transition"
+          className="bg-brand-500 hover:bg-brand-400 text-white font-semibold px-5 py-2.5 rounded-lg transition"
         >
           + Sell a Piano
         </Link>
@@ -47,7 +47,7 @@ export default function Home() {
         <div className="text-center py-24 text-gray-500">
           <p className="text-5xl mb-4">🎹</p>
           <p className="text-lg">No pianos listed yet.</p>
-          <Link href="/list" className="text-orange-400 hover:underline mt-2 inline-block">
+          <Link href="/list" className="text-brand-400 hover:underline mt-2 inline-block">
             Be the first to sell one →
           </Link>
         </div>

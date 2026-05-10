@@ -57,7 +57,7 @@ export default function ListingPage({ params }: { params: Promise<{ id: string }
     return (
       <div className="text-center py-24 text-gray-400">
         <p>Listing not found.</p>
-        <Link href="/" className="text-orange-400 hover:underline mt-2 inline-block">← Back to Browse</Link>
+        <Link href="/" className="text-brand-400 hover:underline mt-2 inline-block">← Back to Browse</Link>
       </div>
     );
   }
@@ -121,7 +121,7 @@ export default function ListingPage({ params }: { params: Promise<{ id: string }
           <p className="text-gray-300 text-sm leading-relaxed">{listing.description}</p>
         )}
 
-        <p className="text-3xl font-bold text-orange-400">${formatUSDC(listing.price)} USDC</p>
+        <p className="text-3xl font-bold text-brand-400">${formatUSDC(listing.price)} USDC</p>
 
         {!isConnected && (
           <div className="pt-2">
@@ -144,7 +144,7 @@ export default function ListingPage({ params }: { params: Promise<{ id: string }
               <button
                 onClick={handleBuy}
                 disabled={busy}
-                className="w-full bg-orange-500 hover:bg-orange-400 disabled:opacity-50 text-white font-bold py-3 rounded-lg transition"
+                className="w-full bg-brand-500 hover:bg-brand-400 disabled:opacity-50 text-white font-bold py-3 rounded-lg transition"
               >
                 {isWriting || awaitingWrite ? "Processing…" : `Buy for $${formatUSDC(listing.price)} USDC`}
               </button>

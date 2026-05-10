@@ -110,7 +110,7 @@ export default function ListPage() {
               name="condition"
               value={form.condition}
               onChange={handleChange}
-              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
             >
               {CONDITIONS.map((c) => <option key={c}>{c}</option>)}
             </select>
@@ -123,7 +123,7 @@ export default function ListPage() {
             name="type"
             value={form.type}
             onChange={handleChange}
-            className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
           >
             {PIANO_TYPES.map((t) => <option key={t}>{t}</option>)}
           </select>
@@ -136,14 +136,14 @@ export default function ListPage() {
               type="button"
               onClick={predictPrice}
               disabled={predicting || !form.brand || !form.yearMade}
-              className="text-xs bg-orange-500 hover:bg-orange-400 disabled:opacity-50 text-white px-3 py-1 rounded-lg transition"
+              className="text-xs bg-brand-500 hover:bg-brand-400 disabled:opacity-50 text-white px-3 py-1 rounded-lg transition"
             >
               {predicting ? "Predicting…" : "Get Suggested Price"}
             </button>
           </div>
           {suggestedPrice && (
             <div className="flex items-center justify-between">
-              <p className="text-orange-400 font-bold text-lg">${suggestedPrice.toLocaleString()} USDC</p>
+              <p className="text-brand-400 font-bold text-lg">${suggestedPrice.toLocaleString()} USDC</p>
               <button
                 type="button"
                 onClick={() => setForm((f) => ({ ...f, price: String(Math.round(suggestedPrice)) }))}
@@ -163,7 +163,7 @@ export default function ListPage() {
             onChange={handleChange}
             rows={3}
             placeholder="Describe the piano's history, any repairs, accessories included…"
-            className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"
+            className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none"
           />
         </div>
 
@@ -192,7 +192,7 @@ export default function ListPage() {
         <button
           type="submit"
           disabled={isPending || isConfirming}
-          className="w-full bg-orange-500 hover:bg-orange-400 disabled:opacity-50 text-white font-bold py-3 rounded-lg transition"
+          className="w-full bg-brand-500 hover:bg-brand-400 disabled:opacity-50 text-white font-bold py-3 rounded-lg transition"
         >
           {isPending ? "Confirm in MetaMask…" : isConfirming ? "Waiting for confirmation…" : "List Piano"}
         </button>
@@ -214,7 +214,7 @@ function Field({
       <input
         type={type} name={name} value={value} onChange={onChange}
         placeholder={placeholder} required={required}
-        className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+        className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-brand-500"
       />
     </div>
   );

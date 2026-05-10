@@ -16,7 +16,7 @@ export default function PianoCard({ listing }: { listing: Listing }) {
 
   return (
     <Link href={`/listing/${listing.id}`}>
-      <div className="bg-gray-800 rounded-xl overflow-hidden hover:ring-2 hover:ring-orange-500 transition cursor-pointer">
+      <div className="bg-gray-800 rounded-xl overflow-hidden hover:ring-2 hover:ring-brand-500 transition cursor-pointer">
         <img
           src={imgSrc}
           alt={`${listing.brand} ${listing.model}`}
@@ -33,7 +33,7 @@ export default function PianoCard({ listing }: { listing: Listing }) {
           <p className="text-gray-400 text-sm">
             {listing.yearMade} · {listing.condition}
           </p>
-          <p className="text-orange-400 font-bold text-lg">${formatUSDC(listing.price)} USDC</p>
+          <p className="text-brand-400 font-bold text-lg">${formatUSDC(listing.price)} USDC</p>
         </div>
       </div>
     </Link>

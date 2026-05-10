@@ -52,7 +52,7 @@ export default function ConnectWallet() {
         href="https://metamask.io/download/"
         target="_blank"
         rel="noreferrer"
-        className="bg-orange-500 hover:bg-orange-400 text-white font-semibold px-4 py-2 rounded-lg transition"
+        className="bg-brand-500 hover:bg-brand-400 text-white font-semibold px-4 py-2 rounded-lg transition"
       >
         Install MetaMask
       </a>
@@ -64,7 +64,7 @@ export default function ConnectWallet() {
       <button
         onClick={() => connect({ connector: metamask })}
         disabled={isPending}
-        className="bg-orange-500 hover:bg-orange-400 disabled:opacity-50 text-white font-semibold px-4 py-2 rounded-lg transition"
+        className="bg-brand-500 hover:bg-brand-400 disabled:opacity-50 text-white font-semibold px-4 py-2 rounded-lg transition"
       >
         {isPending ? "Connecting…" : "Connect MetaMask"}
       </button>
