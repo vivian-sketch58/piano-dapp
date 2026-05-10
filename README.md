@@ -1,17 +1,26 @@
-![Solidity](https://img.shields.io/badge/Solidity-363636?style=for-the-badge&logo=solidity&logoColor=white)
-![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
-![HuggingFace](https://img.shields.io/badge/HuggingFace-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)
-![MetaMask](https://img.shields.io/badge/MetaMask-E2761B?style=for-the-badge&logo=metamask&logoColor=white)
-![Ethereum](https://img.shields.io/badge/Base_Sepolia-0052FF?style=for-the-badge&logo=ethereum&logoColor=white)
-![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
-![RAG](https://img.shields.io/badge/RAG-LangChain%20+%20FAISS-1C3C3C?style=for-the-badge&logoColor=white)
-![DuckDuckGo](https://img.shields.io/badge/DuckDuckGo-DE5833?style=for-the-badge&logo=duckduckgo&logoColor=white)
-![ML](https://img.shields.io/badge/ML-GBR-F7931E?style=for-the-badge&logoColor=white)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
-![n8n](https://img.shields.io/badge/n8n-EA4B71?style=for-the-badge&logo=n8n&logoColor=white)
-![Telegram](https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)
+<!-- Blockchain DApp: Blue -->
+![Solidity](https://img.shields.io/badge/Solidity-1D4ED8?style=for-the-badge&logo=solidity&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-1D4ED8?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-1D4ED8?style=for-the-badge&logo=typescript&logoColor=white)
+![MetaMask](https://img.shields.io/badge/MetaMask-1D4ED8?style=for-the-badge&logo=metamask&logoColor=white)
+![Base_Sepolia](https://img.shields.io/badge/Base_Sepolia-1D4ED8?style=for-the-badge&logo=ethereum&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-1D4ED8?style=for-the-badge&logo=vercel&logoColor=white)
+<br>
+<!-- Multi-agents RAG+DuckDuckGo: Purple -->
+![FastAPI](https://img.shields.io/badge/FastAPI-7C3AED?style=for-the-badge&logo=fastapi&logoColor=white)
+![HuggingFace](https://img.shields.io/badge/HuggingFace-7C3AED?style=for-the-badge&logo=huggingface&logoColor=white)
+![RAG](https://img.shields.io/badge/RAG_LangChain+FAISS-7C3AED?style=for-the-badge&logoColor=white)
+![DuckDuckGo](https://img.shields.io/badge/DuckDuckGo-7C3AED?style=for-the-badge&logo=duckduckgo&logoColor=white)
+<br>
+<!-- ML deployment: Orange -->
+![ML](https://img.shields.io/badge/ML_GBR-EA580C?style=for-the-badge&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-EA580C?style=for-the-badge&logo=scikit-learn&logoColor=white)
+<br>
+<!-- n8n Telegram bot: Green -->
+![n8n](https://img.shields.io/badge/n8n-16A34A?style=for-the-badge&logo=n8n&logoColor=white)
+![Telegram](https://img.shields.io/badge/Telegram-16A34A?style=for-the-badge&logo=telegram&logoColor=white)
+
+
 
 # BlueRoseMart — Blockchain Piano Marketplace
 
