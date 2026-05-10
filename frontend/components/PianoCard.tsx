@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Listing, ListingStatus, formatUSDC } from "@/lib/contracts";
 
 const STATUS_LABELS: Record<number, { label: string; color: string }> = {
-  [ListingStatus.Listed]: { label: "Available", color: "bg-green-600" },
+  [ListingStatus.Listed]: { label: "Available", color: "bg-orange-500" },
   [ListingStatus.AwaitingDelivery]: { label: "Awaiting Delivery", color: "bg-yellow-600" },
   [ListingStatus.Sold]: { label: "Sold", color: "bg-gray-600" },
   [ListingStatus.Cancelled]: { label: "Cancelled", color: "bg-red-700" },
